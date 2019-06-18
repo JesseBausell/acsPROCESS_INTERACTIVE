@@ -55,14 +55,17 @@ User Instructions:
   4. Select subset of ac-s cast for processing 
     a. Examine time-series plot of ac-s cast (appears automatically). Displays ac-s vertical position (depth) over time (spectrum index).
     b. To select subset of ac-s cast, enter "y" into command window
-    c. Telect cast subset by entering indices into command window. These can be entered individually (not recommended) or as an array,
-    using a colon to separate beginning and end indices (recommended).
-    d. Evaluate previously-selected cast subset(s) (highlighted in red). To select an additional subset enter repeat steps b-c. 
+    c. Select cast subset by entering indices into command window. These can be entered individually (not recommended) or as an array,
+    using a colon to separate beginning and end indices (recommended). Data cursor can assist in this process.
+    d. Evaluate previously-selected cast subset(s) (highlighted in red). To select an additional cast subset enter repeat steps b-c. 
     e. If satsified with previously-made selection(s) enter "n" into the command window. Re-confirm you are satisfied by entering "y"
     f. If unsatisfied with selections, enter "redo" or "exit" to start over.
   5. Select appropriate pure-water absorption (MAT) file when prompted. (file is created using Purewater_SpecBuilder.m)
   6. Select appropriate pure-water attenuation (MAT) file when prompted. (file is created using Purewater_SpecBuilder.m)
   7. Flag questionable c spetra for possible removal
+    a. Examine depth profile comparing first 8 ac-s channels (lowest 8 wavelengths) of c spectra. These channels are oriented
+    vertically by depth index (not by actual depth), with shallowest index on top.
+    b. To create a range of "acceptable" c values, 
   8. Flag questionable a spetra for possible removal (see step 6)
   9. Evaluate (and potentially discard) flagged c spectra
   10. Evaluate (and potentially discard) flagged a spectra (see step 8)
