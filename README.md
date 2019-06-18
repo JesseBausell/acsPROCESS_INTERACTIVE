@@ -33,16 +33,29 @@ Program Description:
 acsPROCESS_INTERACTIVE processes raw field-collected ac-s measurements following a series of steps. It is outfitted to process raw data contained in ac-s ascii files regardless of ac-s channel number, wavelengths, or orientation of column field headers. It is similar in its function to acsPROCESS_SEABASS with the following exceptions: 1. user to determine which portions of ac-s multicast to process, 2. QAQC is performed interactively by user (it is not automated), 3. processed ac-s are output as (depth-binned) Hydrolight-compatible .txt files and MAT/HDF5 files. The later can be used for different types of statistical analyses such as boostrapping. Steps are outlined below:
   1. Reads ascii data into Matlab
   2. Calculates water column salinity using measurements conductivity (CTD)
-  3. Prompts user to select a subset of the cast for processing. This can be as much or as little of the cast as he/she desires.
+  3. Prompts user to select a subset of the cast for processing (unselected portions of the cast will be excluded from all subsequent
+  steps). This can be as much or as little of the cast as he/she desires.
   4. Performs correction for spectral "jumps" caused by ac-s sampling using two holographic gratings
   5. Subtracts a/c pure-water calibration spectra from field-measured ac-s data**
   6. Corrects for the optical effects temperature and salinity using Sullivan et al. (2006)
   7. Corrects for scattering using Rottgers et al. (2013)
-  8. QA/QC ac-s data. Paired ac spectra are flagged and removed if:
-    a. c spectrum contains value less than zero or greater than 4 /m (400-700 nm)
-    b. a spectrum contains value less than zero or greater than c value measured by the same channel (400-700 nm)
-  8. Processed ac-s data are timestamped
-  9. Produces Seabass-formatted ascii (.txt) file containing spectral offsets (a & c) calculated from holographic grating correction 
-  10. Produces SeaBASS-formatted ascii (.txt) file containing time-stamped a/c spectra with depths at which they were sampled
-  11. Produces SeaBASS-formatted ascii (.txt) file(s) containing depth-binned a/c average spectra and standard deviations. 
-  12. Produces Matlab plot (.fig) detailing ac-s water column position (depth) over time (spectrum index). Plot will contain a user-selected reference point and a time-stamp (which is listed above the plot). Assuming ac-s was deployed simultaneously with hs6, hs6PROCESS_SEABASS.m will use this information to synchronize ac-s and hs6 data. In the event that ac-s and hs6 were deployed independently, the .fig file can be ignored.
+  8. c spectra are interpolated to wavelengths of a spectra 
+  9. QA/QC ac-s data. Paired ac spectra are flagged and removed by user:
+    a. user flags c spectra that may be contaminated
+    b. user flags a spectra that may be contaminated
+    c. determines whether to remove previously-flagged a/c spectra. If an a spectrum is removed, its corresponding (paired) c spectrum is 
+    removed automatically as well (and vice versa).
+  10. Produces MAT/HDF5 file containing processed ac-s data (see "Outputs")
+  11. Produces depth-binned ac-s files formatted for Hydrolight 5.0
+  
+User Instructions:
+  1. Fill out metadata_HeaderFile_acs.txt (as specified below)
+  2. Run acsPROCESS_INTERACTIVE using Matlab command window.
+  3. Select subset of ac-s cast for processing 
+  3. Select appropriate metadata_HeaderFile_acs.txt file when prompted. 
+  4. Select appropriate pure-water absorption (MAT) file when prompted. (file is created using Purewater_SpecBuilder.m)
+  5. Select appropriate pure-water attenuation (MAT) file when prompted. (file is created using Purewater_SpecBuilder.m)
+  6. Time-stamp ac-s data for potential syncrhonization with hs6
+    a. Matlab will produce a "time series" plot indicating ac-s depth over "time" (spectum index).
+    b. User selects a reference point on this plot by entering the index of the desired point into the command window.***
+    c. User is asked to confirm his/her selection on command window with y/n keys. If user rejects his/her selection, he/she will be           prompted to try again.
