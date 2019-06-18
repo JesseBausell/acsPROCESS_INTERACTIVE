@@ -66,12 +66,22 @@ User Instructions:
     a. Examine depth profile comparing first 8 ac-s channels (lowest 8 wavelengths) of c spectra. These channels are oriented
     vertically by depth index (not by actual depth), with shallowest index on top.
     b. To create an acceptable range of c values, enter "y" into command window in response to message "Create ACS Limit?" To skip steps
-    c-d, enter "n".
+    c-e, enter "n".**
     c. Using the command window, enter an upper limit for c, press enter, enter a lower limit for c, and press enter. "0" is good lower
     limit because c is always positive.
     d. Limits are indicated on depth profile by black vertical lines. Enter "y" or "n" into command window to accept limits or try again. 
     e. Any spectrum containing c values outside of user-selected range for channels 1-8 will be automatically flagged. A flagged spectrum
-    is indicated by a row of 8 white stars (one on each channel).
+    is indicated by a row of 8 white stars (one on each channel). If satisfied with limits, enter "n" when "Create ACS limit? (y/n)" re-
+    appears on command window.
+    f. To flag a single spectrum enter "y" in response to "Flag additional ACS readings? (y/n):" command window prompt. Enter "n" to skip
+    this step completely.
+      If "y" is entered, prompt will say "Enter depth of data you want to flag: ". Flag the spectrum of interest by entering its index 
+      into the command window. An identical c depth profile will then appear indicating ONLY the flagged spectrum. Confirm selection with
+      "y", reject with "n".
+    g. acsPROCESS_INTERACTIVE 
+    
+    To stop flagging c spectra individually, enter "n" in response to the aforementioned step f prompt and you will be asked to repeat
+    steps a-f for the next set of 8 ac-s channels. acsPROCESS_INTERACTIVE cycles through this process 
     
     
   8. Flag questionable a spetra for possible removal (see step 7)
