@@ -78,15 +78,17 @@ User Instructions:
       If "y" is entered, prompt will say "Enter depth of data you want to flag: ". Flag the spectrum of interest by entering its index 
       into the command window. An identical c depth profile will then appear indicating ONLY the flagged spectrum. Confirm selection with
       "y", reject with "n".
-    g. acsPROCESS_INTERACTIVE 
-    
-    To stop flagging c spectra individually, enter "n" in response to the aforementioned step f prompt and you will be asked to repeat
-    steps a-f for the next set of 8 ac-s channels. acsPROCESS_INTERACTIVE cycles through this process 
-    
-    
-  8. Flag questionable a spetra for possible removal (see step 7)
-  9. Evaluate (and potentially discard) flagged c spectra
-  10. Evaluate (and potentially discard) flagged a spectra (see step 8)
+    g. acsPROCESS_INTERACTIVE repeats steps a-f for ac-s channels centered inside the visible (~400-670 nm) as well as for c interpolated
+    at 715 nm. Enter "n" in response to step 7 prompt shift to the next 8 channels. 
+  9. Evaluate flagged c spectra
+    a. You will now be asked to accept or reject your flagged c spectra. The first flagged c spectrum is displayed in a 2-3 panneled.
+    These subplots compare flagged c spectrum to unflagged spectra located inside its 2 m depth bin (center), as well as those of 
+    neighboring depth bins. Subplots are labeled with depth of flagged c spectrum; solid black lines indicate  mean +/- 3*sigma of 
+    unflagged c spectra.
+    b. The purpose the above-mentioned plot is to allow users to evaluate flagged c spectrum by visually comparing it to the other spectra
+    found nearby. Enter "keep" to "discard" to retain or remove spectrum from processing. DO NOT SELECT "edit"!
+    c. Confirm decision with "y" or "n"
+  10. Evaluate flagged a spectra (see step 9)
   
 Filling out metadata_HeaderFile_acs.txt:
 acsPROCESS_SEABASS relies on metadata_HeaderFile_acs.txt to process ac-s data. All information (excluding pure-water MAT files) should be included in this header. A header template (metadata_HeaderFile_acs.txt) indicating important fields is provided in GitHub acsPROCESS_SEABASS repository. When filling out this header file, the first three headers (indicating user instructions) should be left alone. Required information fields contain = signs. USER SHOULD ONLY ALTER TEXT APPEARING ON THE RIGHT HAND SIDE OF =. User should indicate unavailability of desired information with "NA". DO NOT DELETE ROWS! Below are fields contained in metadata_HeaderFile_acs.txt and instructions on how to fill them out. Spaces should never be used in header fields; use underscore instead (_).
