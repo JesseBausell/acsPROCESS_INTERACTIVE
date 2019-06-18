@@ -62,11 +62,19 @@ User Instructions:
     f. If unsatisfied with selections, enter "redo" or "exit" to start over.
   5. Select appropriate pure-water absorption (MAT) file when prompted. (file is created using Purewater_SpecBuilder.m)
   6. Select appropriate pure-water attenuation (MAT) file when prompted. (file is created using Purewater_SpecBuilder.m)
-  7. Flag questionable c spetra for possible removal
+  7. Flag questionable c spetra for possible removal. 
     a. Examine depth profile comparing first 8 ac-s channels (lowest 8 wavelengths) of c spectra. These channels are oriented
     vertically by depth index (not by actual depth), with shallowest index on top.
-    b. To create a range of "acceptable" c values, 
-  8. Flag questionable a spetra for possible removal (see step 6)
+    b. To create an acceptable range of c values, enter "y" into command window in response to message "Create ACS Limit?" To skip steps
+    c-d, enter "n".
+    c. Using the command window, enter an upper limit for c, press enter, enter a lower limit for c, and press enter. "0" is good lower
+    limit because c is always positive.
+    d. Limits are indicated on depth profile by black vertical lines. Enter "y" or "n" into command window to accept limits or try again. 
+    e. Any spectrum containing c values outside of user-selected range for channels 1-8 will be automatically flagged. A flagged spectrum
+    is indicated by a row of 8 white stars (one on each channel).
+    
+    
+  8. Flag questionable a spetra for possible removal (see step 7)
   9. Evaluate (and potentially discard) flagged c spectra
   10. Evaluate (and potentially discard) flagged a spectra (see step 8)
   
