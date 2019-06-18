@@ -51,16 +51,21 @@ acsPROCESS_INTERACTIVE processes raw field-collected ac-s measurements following
 User Instructions:
   1. Fill out metadata_HeaderFile_acs.txt (as specified below)
   2. Run acsPROCESS_INTERACTIVE.m using Matlab command window.
-  3. Select subset of ac-s cast for processing 
-    a. user is presented with a time-series of ac-s cast. This plot shows ac-s water column position  (depth) over time (spectrum index)
-    b. to select subset of 
   3. Select appropriate metadata_HeaderFile_acs.txt file when prompted. 
-  4. Select appropriate pure-water absorption (MAT) file when prompted. (file is created using Purewater_SpecBuilder.m)
-  5. Select appropriate pure-water attenuation (MAT) file when prompted. (file is created using Purewater_SpecBuilder.m)
-  6. Flag questionable c spetra for possible removal
-  7. Flag questionable a spetra for possible removal (see step 6)
-  8. Evaluate (and potentially discard) flagged c spectra
-  9. Evaluate (and potentially discard) flagged a spectra (see step 8)
+  4. Select subset of ac-s cast for processing 
+    a. Examine time-series plot of ac-s cast (appears automatically). Displays ac-s vertical position (depth) over time (spectrum index).
+    b. To select subset of ac-s cast, enter "y" into command window
+    c. Telect cast subset by entering indices into command window. These can be entered individually (not recommended) or as an array,
+    using a colon to separate beginning and end indices (recommended).
+    d. Evaluate previously-selected cast subset(s) (highlighted in red). To select an additional subset enter repeat steps b-c. 
+    e. If satsified with previously-made selection(s) enter "n" into the command window. Re-confirm you are satisfied by entering "y"
+    f. If unsatisfied with selections, enter "redo" or "exit" to start over.
+  5. Select appropriate pure-water absorption (MAT) file when prompted. (file is created using Purewater_SpecBuilder.m)
+  6. Select appropriate pure-water attenuation (MAT) file when prompted. (file is created using Purewater_SpecBuilder.m)
+  7. Flag questionable c spetra for possible removal
+  8. Flag questionable a spetra for possible removal (see step 6)
+  9. Evaluate (and potentially discard) flagged c spectra
+  10. Evaluate (and potentially discard) flagged a spectra (see step 8)
   
 Filling out metadata_HeaderFile_acs.txt:
 acsPROCESS_SEABASS relies on metadata_HeaderFile_acs.txt to process ac-s data. All information (excluding pure-water MAT files) should be included in this header. A header template (metadata_HeaderFile_acs.txt) indicating important fields is provided in GitHub acsPROCESS_SEABASS repository. When filling out this header file, the first three headers (indicating user instructions) should be left alone. Required information fields contain = signs. USER SHOULD ONLY ALTER TEXT APPEARING ON THE RIGHT HAND SIDE OF =. User should indicate unavailability of desired information with "NA". DO NOT DELETE ROWS! Below are fields contained in metadata_HeaderFile_acs.txt and instructions on how to fill them out. Spaces should never be used in header fields; use underscore instead (_).
