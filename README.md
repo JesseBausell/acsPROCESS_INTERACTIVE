@@ -52,6 +52,8 @@ User Instructions:
   1. Fill out metadata_HeaderFile_acs.txt (as specified below)
   2. Run acsPROCESS_INTERACTIVE.m using Matlab command window.
   3. Select subset of ac-s cast for processing 
+    a. user is presented with a time-series of ac-s cast. This plot shows ac-s water column position  (depth) over time (spectrum index)
+    b. to select subset of 
   3. Select appropriate metadata_HeaderFile_acs.txt file when prompted. 
   4. Select appropriate pure-water absorption (MAT) file when prompted. (file is created using Purewater_SpecBuilder.m)
   5. Select appropriate pure-water attenuation (MAT) file when prompted. (file is created using Purewater_SpecBuilder.m)
