@@ -66,7 +66,7 @@ User Instructions:
   6. Select appropriate pure-water attenuation (MAT) file when prompted. (file is created using Purewater_SpecBuilder.m)
   7. Flag questionable c spetra for possible removal. 
     a. Examine depth profile comparing first 8 ac-s channels (lowest 8 wavelengths) of c spectra. These channels are oriented
-    vertically by depth index (not by actual depth), with shallowest index on top.
+    vertically by depth index (as opposed to actual depth), with shallowest index on top.
     b. To create an acceptable range of c values, enter "y" into command window in response to message "Create ACS Limit?" To skip steps
     c-e, enter "n".**
     c. Using the command window, enter an upper limit for c, press enter, enter a lower limit for c, and press enter. "0" is good lower
@@ -76,20 +76,17 @@ User Instructions:
     is indicated by a row of 8 white stars (one on each channel). If satisfied with limits, enter "n" when "Create ACS limit? (y/n)" re-
     appears on command window.
     f. To flag a single spectrum enter "y" in response to "Flag additional ACS readings? (y/n):" command window prompt. Enter "n" to skip
-    this step completely.
-      If "y" is entered, prompt will read "Enter depth of data you want to flag: ". Enter the index of the spectrum of interest
-      into the command window. You then will be asked to confirm or reject your selection ("y" or "n") while viewing it.
+    this step completely. If "y" is entered, prompt will read "Enter depth of data you want to flag: ". Enter the index of the spectrum of interest into the command window. You then will be asked to confirm or reject your selection ("y" or "n") as you view it.
     g. acsPROCESS_INTERACTIVE repeats steps a-f for ac-s channels centered inside the visible (~400-670 nm) as well as for c interpolated
-    at 715 nm. Enter "n" in response to the step 7 prompt move up the spectrum to view the next set of 8 channels. 
-  7. Flag questionable c spetra for possible removal (see steps. 
-
-  8. Evaluate flagged c spectra. You will now be asked to accept or reject your flagged c spectra.
+    at 715 nm. Enter "n" in response to the step 7 prompt in order to evaluate the next set of 8 channels. 
+  8. Flag questionable a spetra for possible removal (see steps 7a-g).
+  9. Evaluate flagged c spectra. You will now be asked to accept or reject your flagged c spectra.
     a.  View your first flagged c spectrum in the subplot display. Flagged c spectrum (red) will be plotted with all c spectra that fall within the 2 m depth bin (e.g. 0-2 m, 2-4 m, etc.) that encompasses it. Flagged c spectrum will also be ploted along with c spectra in adjacent 2 m depth bin(s). Solid black lines represent mean +/- 3*sigma of the unflagged c spectrum within a bin. Subplots are also labeled with numerical depth (m) of flagged spectrum.
     b. Compare shape and magnitude of flagged c spectrum against unflagged spectra.
     b. In the command window, enter "keep" to retain and "discard" to remove spectrum from analysis. DO NOT SELECT "EDIT"
     c. Confirm your decision using "y" or "n"
     d. Repeat steps a-c with the remainder of flagged c spectra.
-  9. Evaluate flagged a spectra (see steps 8a-d)
+  10. Evaluate flagged a spectra (see steps 9a-d)
   
 Filling out metadata_HeaderFile_acs.txt:
 acsPROCESS_SEABASS relies on metadata_HeaderFile_acs.txt to process ac-s data. All information (excluding pure-water MAT files) should be included in this header. A header template (metadata_HeaderFile_acs.txt) indicating important fields is provided in GitHub acsPROCESS_SEABASS repository. When filling out this header file, the first three headers (indicating user instructions) should be left alone. Required information fields contain = signs. USER SHOULD ONLY ALTER TEXT APPEARING ON THE RIGHT HAND SIDE OF =. User should indicate unavailability of desired information with "NA". DO NOT DELETE ROWS! Below are fields contained in metadata_HeaderFile_acs.txt and instructions on how to fill them out. Spaces should never be used in header fields; use underscore instead (_).
