@@ -9,8 +9,9 @@ purewater_absorption.mat - MAT file containing pure-water a calibration spectrum
 purewater_attenuation.mat - MAT file containing pure-water c calibration spectrum (see Purewater_SpecBuilder)
 
 Outputs: 
-Station_#_ac-s_bin_#.txt - depth-binned file(s) containing processed ac-s data. Formatted for Hydrolight 5.0. acsPROCESS_INTERACTIVE will create one file for each user-specified depth bin (see "Filling out metadata_HeaderFile_acs.txt" section). 
+Station_#_ac-s_bin_#.txt* - depth-binned file(s) containing processed ac-s data. Formatted for Hydrolight 5.0. acsPROCESS_INTERACTIVE will create one file for each user-specified depth bin (see "Filling out metadata_HeaderFile_acs.txt" section). 
 Station_#_acs.mat - MAT/HDF5 file containing individual a spectra (variable: A_CORR), their corresponding c spectra (variable: C_CORR), depths at which spectra were measured (variable: deptH), and wavelengths of a/c spectra (variable: lambda). A_CORR and C_CORR matrices are ordered by ascending depth (rows) and ascending wavelengths (columns).
+*multiple binned files can be made depending on how many depth-bin sizes user specifies in metadata_HeaderFile_acs.txt
 
 Required Matlab Scripts and Functions:
 ACS_dataFLAGGER6.m
@@ -34,7 +35,7 @@ acsPROCESS_INTERACTIVE processes raw field-collected ac-s measurements following
   1. Reads ascii data into Matlab
   2. Calculates water column salinity using measurements conductivity (CTD)
   3. Prompts user to select a subset of the cast for processing (unselected portions of the cast will be excluded from all subsequent
-  steps). This can be as much or as little of the cast as he/she desires.
+  steps). This can be as much or as little of the cast as user desires.
   4. Performs correction for spectral "jumps" caused by ac-s sampling using two holographic gratings
   5. Subtracts a/c pure-water calibration spectra from field-measured ac-s data**
   6. Corrects for the optical effects temperature and salinity using Sullivan et al. (2006)
@@ -47,16 +48,17 @@ acsPROCESS_INTERACTIVE processes raw field-collected ac-s measurements following
     removed automatically as well (and vice versa).
   10. Produces MAT/HDF5 file containing processed ac-s data (see "Outputs")
   11. Produces depth-binned ac-s files formatted for Hydrolight 5.0
+  ** Pure-water a/c spectra undergo holographic grating and Sullivan et al. (2006) temperature corrections before subtraction occurs
   
 User Instructions:
   1. Fill out metadata_HeaderFile_acs.txt (as specified below)
   2. Run acsPROCESS_INTERACTIVE.m using Matlab command window.
   3. Select appropriate metadata_HeaderFile_acs.txt file when prompted. 
   4. Select subset of ac-s cast for processing 
-    a. Examine time-series plot of ac-s cast (appears automatically). Displays ac-s vertical position (depth) over time (spectrum index).
+    a. Examine time-series plot of ac-s cast (appears automatically). Plot displays ac-s vertical position (depth) over time (spectrum index).
     b. To select subset of ac-s cast, enter "y" into command window
     c. Select cast subset by entering indices into command window. These can be entered individually (not recommended) or as an array,
-    using a colon to separate beginning and end indices (recommended). Data cursor can assist in this process.
+    using a colon to separate beginning and end indices (recommended). Matlab's figure data cursor can help determine indices.
     d. Evaluate previously-selected cast subset(s) (highlighted in red). To select an additional cast subset enter repeat steps b-c. 
     e. If satsified with previously-made selection(s) enter "n" into the command window. Re-confirm you are satisfied by entering "y"
     f. If unsatisfied with selections, enter "redo" or "exit" to start over.
@@ -75,20 +77,19 @@ User Instructions:
     appears on command window.
     f. To flag a single spectrum enter "y" in response to "Flag additional ACS readings? (y/n):" command window prompt. Enter "n" to skip
     this step completely.
-      If "y" is entered, prompt will say "Enter depth of data you want to flag: ". Flag the spectrum of interest by entering its index 
-      into the command window. An identical c depth profile will then appear indicating ONLY the flagged spectrum. Confirm selection with
-      "y", reject with "n".
+      If "y" is entered, prompt will read "Enter depth of data you want to flag: ". Enter the index of the spectrum of interest
+      into the command window. You then will be asked to confirm or reject your selection ("y" or "n") while viewing it.
     g. acsPROCESS_INTERACTIVE repeats steps a-f for ac-s channels centered inside the visible (~400-670 nm) as well as for c interpolated
-    at 715 nm. Enter "n" in response to step 7 prompt shift to the next 8 channels. 
-  9. Evaluate flagged c spectra
-    a. You will now be asked to accept or reject your flagged c spectra. The first flagged c spectrum is displayed in a 2-3 panneled.
-    These subplots compare flagged c spectrum to unflagged spectra located inside its 2 m depth bin (center), as well as those of 
-    neighboring depth bins. Subplots are labeled with depth of flagged c spectrum; solid black lines indicate  mean +/- 3*sigma of 
-    unflagged c spectra.
-    b. The purpose the above-mentioned plot is to allow users to evaluate flagged c spectrum by visually comparing it to the other spectra
-    found nearby. Enter "keep" to "discard" to retain or remove spectrum from processing. DO NOT SELECT "edit"!
-    c. Confirm decision with "y" or "n"
-  10. Evaluate flagged a spectra (see step 9)
+    at 715 nm. Enter "n" in response to the step 7 prompt move up the spectrum to view the next set of 8 channels. 
+  7. Flag questionable c spetra for possible removal (see steps. 
+
+  8. Evaluate flagged c spectra. You will now be asked to accept or reject your flagged c spectra.
+    a.  View your first flagged c spectrum in the subplot display. Flagged c spectrum (red) will be plotted with all c spectra that fall within the 2 m depth bin (e.g. 0-2 m, 2-4 m, etc.) that encompasses it. Flagged c spectrum will also be ploted along with c spectra in adjacent 2 m depth bin(s). Solid black lines represent mean +/- 3*sigma of the unflagged c spectrum within a bin. Subplots are also labeled with numerical depth (m) of flagged spectrum.
+    b. Compare shape and magnitude of flagged c spectrum against unflagged spectra.
+    b. In the command window, enter "keep" to retain and "discard" to remove spectrum from analysis. DO NOT SELECT "EDIT"
+    c. Confirm your decision using "y" or "n"
+    d. Repeat steps a-c with the remainder of flagged c spectra.
+  9. Evaluate flagged a spectra (see steps 8a-d)
   
 Filling out metadata_HeaderFile_acs.txt:
 acsPROCESS_SEABASS relies on metadata_HeaderFile_acs.txt to process ac-s data. All information (excluding pure-water MAT files) should be included in this header. A header template (metadata_HeaderFile_acs.txt) indicating important fields is provided in GitHub acsPROCESS_SEABASS repository. When filling out this header file, the first three headers (indicating user instructions) should be left alone. Required information fields contain = signs. USER SHOULD ONLY ALTER TEXT APPEARING ON THE RIGHT HAND SIDE OF =. User should indicate unavailability of desired information with "NA". DO NOT DELETE ROWS! Below are fields contained in metadata_HeaderFile_acs.txt and instructions on how to fill them out. Spaces should never be used in header fields; use underscore instead (_).
